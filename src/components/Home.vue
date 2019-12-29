@@ -19,7 +19,7 @@
           <br>
           <button>Submit</button>
         </form>
-        <button @click="changeView">Change View</button>
+        <button @click="changeView(true)">Change View</button>
       </div>
       <div></div>
     </div>
@@ -40,17 +40,29 @@ export default {
       formData: {
         username: "",
         email: ""
-      }
+      },
+      testCondition: true,
+      testData: [
+        {
+          username: "sanfrancisco",
+          email: "sf@gmail.com"
+        },
+        {
+          username: "tomtom",
+          email: "gps@gmail.com"
+        }
+      ]
     };
   },
   methods: {
     submitForm() {
       const { username, email } = this.formData;
+
       console.log(username);
       console.log(email);
     },
-    changeView() {
-      router.push("/details");
+    changeView(x) {
+      if (x === true) router.push("/details");
     }
   }
 };
