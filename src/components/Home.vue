@@ -19,6 +19,7 @@
           <br>
           <button>Submit</button>
         </form>
+        <button @click="changeView">Change View</button>
       </div>
       <div></div>
     </div>
@@ -26,6 +27,9 @@
 </template>
 
 <script>
+// import router to change view on click / pushing path to router
+import router from "../router";
+
 export default {
   name: "Home",
   props: {
@@ -44,6 +48,9 @@ export default {
       const { username, email } = this.formData;
       console.log(username);
       console.log(email);
+    },
+    changeView() {
+      router.push("/details");
     }
   }
 };
