@@ -5,6 +5,11 @@
       <li>{{ test.username }}</li>
       <li>{{ test.email }}</li>
     </ul>
+    <br>
+    <button
+      @click="addClass = !addClass"
+      :class="{ dynamicClassName: addClass, dynamicClassNameFalse: !addClass}"
+    >Dynamic class css</button>
   </div>
 </template>
 
@@ -27,7 +32,8 @@ export default {
           username: "tomtom",
           email: "gps@gmail.com"
         }
-      ]
+      ],
+      addClass: true
     };
   },
   methods: {}
@@ -36,4 +42,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.dynamicClassName {
+  background-color: red;
+}
+
+.dynamicClassNameFalse {
+  background-color: green;
+}
 </style>

@@ -19,7 +19,7 @@
           <br>
           <button>Submit</button>
         </form>
-        <button @click="changeView(true)">Change View</button>
+        <button @click="changeView(true)" @keyup.enter="submitForm">Change View</button>
       </div>
       <div></div>
     </div>
