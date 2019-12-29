@@ -10,6 +10,11 @@
       @click="addClass = !addClass"
       :class="{ dynamicClassName: addClass, dynamicClassNameFalse: !addClass}"
     >Dynamic class css</button>
+    <br>
+    <br>
+    <button @click="class1 = !class1">class1</button>
+    <button @click="class2 = !class2">class2</button>
+    <div :class="moreThanOneDynamicClass">More than one class</div>
   </div>
 </template>
 
@@ -33,10 +38,20 @@ export default {
           email: "gps@gmail.com"
         }
       ],
-      addClass: true
+      addClass: true,
+      class1: false,
+      class2: false
     };
   },
-  methods: {}
+  methods: {},
+  computed: {
+    moreThanOneDynamicClass() {
+      return {
+        class1: this.class1,
+        class2: this.class2
+      };
+    }
+  }
 };
 </script>
 
@@ -48,5 +63,13 @@ export default {
 
 .dynamicClassNameFalse {
   background-color: green;
+}
+
+.class1 {
+  width: 200px;
+}
+
+.class2 {
+  background-color: lightcoral;
 }
 </style>
