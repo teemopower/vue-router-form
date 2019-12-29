@@ -8,13 +8,13 @@
           <label>Username</label>
           <br>
           <br>
-          <input type="text">
+          <input type="text" v-model="formData.username">
           <br>
           <br>
           <label>Email</label>
           <br>
           <br>
-          <input type="text">
+          <input type="email" v-model="formData.email">
           <br>
           <br>
           <button>Submit</button>
@@ -41,7 +41,9 @@ export default {
   },
   methods: {
     submitForm() {
-      console.log("hi");
+      const { username, email } = this.formData;
+      console.log(username);
+      console.log(email);
     }
   }
 };
