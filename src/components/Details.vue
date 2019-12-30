@@ -27,6 +27,12 @@
     <br>
     <br>
     <div v-show="showExample">Show if v-show is true</div>
+    <br>
+    <br>
+    <input type="text" ref="mario">
+    <input type="text" ref="luigi">
+    <button @click="readRefs">Read Refs</button>
+    ref value is {{ refValue }}
   </div>
 </template>
 
@@ -54,10 +60,16 @@ export default {
       class1: false,
       class2: false,
       ifExample: false,
-      showExample: true
+      showExample: true,
+      refValue: ""
     };
   },
-  methods: {},
+  methods: {
+    readRefs() {
+      console.log(this.$refs);
+      this.refValue = this.$refs.mario.value;
+    }
+  },
   computed: {
     moreThanOneDynamicClass() {
       return {
