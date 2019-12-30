@@ -23,17 +23,22 @@
       </div>
       <div></div>
     </div>
+    <!-- <Details/> -->
   </div>
 </template>
 
 <script>
 // import router to change view on click / pushing path to router
 import router from "../router";
+import Details from "@/components/Details.vue";
 
 export default {
   name: "Home",
   props: {
     msg: String
+  },
+  components: {
+    Details
   },
   data() {
     return {
