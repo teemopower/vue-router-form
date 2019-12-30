@@ -5,6 +5,11 @@
       <li>{{ test.username }}</li>
       <li>{{ test.email }}</li>
     </ul>
+    <template v-for="test in testData">
+      <div v-for="(val, key) in test">
+        <p>{{ key }} : {{ val }}</p>
+      </div>
+    </template>
     <br>
     <button
       @click="addClass = !addClass"
@@ -15,6 +20,13 @@
     <button @click="class1 = !class1">class1</button>
     <button @click="class2 = !class2">class2</button>
     <div :class="moreThanOneDynamicClass">More than one class</div>
+    <br>
+    <br>
+    <div v-if="ifExample">Show if v-if is true</div>
+    <div v-else-if="!ifExample">Show if v-if is false</div>
+    <br>
+    <br>
+    <div v-show="showExample">Show if v-show is true</div>
   </div>
 </template>
 
@@ -40,7 +52,9 @@ export default {
       ],
       addClass: true,
       class1: false,
-      class2: false
+      class2: false,
+      ifExample: false,
+      showExample: true
     };
   },
   methods: {},
