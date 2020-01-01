@@ -14,7 +14,9 @@ export default {
     return {};
   },
   props: {
-    testProp: Array
+    testProp: {
+      type: Array
+    }
   },
   methods: {
     accessPropData() {
