@@ -13,7 +13,9 @@ export default {
   data() {
     return {};
   },
-  props: ["testProp"],
+  props: {
+    testProp: Array
+  },
   methods: {
     accessPropData() {
       console.log(this.testProp);
