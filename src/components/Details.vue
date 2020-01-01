@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <h1>Details page</h1>
-    <ul v-for="test in testData" :key="test.id">
+    <ul v-for="test in testData">
       <li>{{ test.username }}</li>
       <li>{{ test.email }}</li>
     </ul>
@@ -33,17 +33,22 @@
     <input type="text" ref="luigi">
     <button @click="readRefs">Read Refs</button>
     ref value is {{ refValue }}
+    <br>
+    <component-sample :testProp="testPropData"/>
   </div>
 </template>
 
 <script>
+import Sample from "./Sample.vue";
+
 export default {
   name: "Details",
-  props: {
-    msg: String
+  components: {
+    "component-sample": Sample
   },
   data() {
     return {
+      testPropData: ["sam", "dan"],
       testData: [
         {
           id: "1",
@@ -63,6 +68,9 @@ export default {
       showExample: true,
       refValue: ""
     };
+  },
+  mounted() {
+    console.log("mounted");
   },
   methods: {
     readRefs() {
