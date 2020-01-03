@@ -36,7 +36,11 @@
     <br>
     {{ updatedName }}
     {{ updatedLocation}}
-    <component-sample :testProp="testPropData" @emittedData="updateTitle($event)"/>
+    <component-sample
+      :testProp="testPropData"
+      :title="updatedName"
+      @emittedData="updateTitle($event)"
+    />
   </div>
 </template>
 

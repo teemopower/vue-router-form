@@ -6,6 +6,7 @@
     <div v-for="(test, index) in testProp" :key="index">{{index}}. {{ test }}</div>
     <br>
     <button @click="emitData">asd</button>
+    {{ title }}
   </div>
 </template>
 
@@ -23,6 +24,9 @@ export default {
   props: {
     testProp: {
       type: Array
+    },
+    title: {
+      type: String
     }
   },
   methods: {
