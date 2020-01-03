@@ -34,7 +34,9 @@
     <button @click="readRefs">Read Refs</button>
     ref value is {{ refValue }}
     <br>
-    <component-sample :testProp="testPropData"/>
+    {{ updatedName }}
+    {{ updatedLocation}}
+    <component-sample :testProp="testPropData" @emittedData="updateTitle($event)"/>
   </div>
 </template>
 
@@ -66,7 +68,9 @@ export default {
       class2: false,
       ifExample: false,
       showExample: true,
-      refValue: ""
+      refValue: "",
+      updatedName: "",
+      updatedLocation: ""
     };
   },
   mounted() {
@@ -76,6 +80,11 @@ export default {
     readRefs() {
       console.log(this.$refs);
       this.refValue = this.$refs.mario.value;
+    },
+    updateTitle(event) {
+      console.log("log in Details component", event);
+      this.updatedName = event.name;
+      this.updatedLocation = event.location;
     }
   },
   computed: {

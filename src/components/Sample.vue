@@ -4,6 +4,8 @@
     <br>SAMPLE COMPONENT
     <br>Here is the prop data ---
     <div v-for="(test, index) in testProp" :key="index">{{index}}. {{ test }}</div>
+    <br>
+    <button @click="emitData">asd</button>
   </div>
 </template>
 
@@ -11,7 +13,12 @@
 export default {
   name: "Sample",
   data() {
-    return {};
+    return {
+      testObject: {
+        name: "jimmy",
+        location: "seattle"
+      }
+    };
   },
   props: {
     testProp: {
@@ -21,6 +28,9 @@ export default {
   methods: {
     accessPropData() {
       console.log(this.testProp);
+    },
+    emitData() {
+      this.$emit("emittedData", this.testObject);
     }
   },
   mounted() {
@@ -31,4 +41,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+button {
+  height: 50px;
+  width: 100px;
+}
 </style>
