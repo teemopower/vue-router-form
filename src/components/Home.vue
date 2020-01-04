@@ -4,7 +4,7 @@
       <div></div>
       <div class="form-container">
         <form @submit.prevent="submitForm">
-          <h2>Contact Us</h2>
+          <h2>{{ formHeader }}</h2>
           <label>Username</label>
           <br>
           <br>
@@ -22,6 +22,7 @@
         <button @click="changeView(true)" @keyup.enter="submitForm">Change View</button>
       </div>
       <div></div>
+      <Details/>
     </div>
     <!-- <Details/> -->
   </div>
@@ -32,16 +33,22 @@
 import router from "../router";
 import Details from "@/components/Details.vue";
 
+import { bus } from "../main.js";
+
 export default {
   name: "Home",
-  props: {
-    msg: String
-  },
   components: {
     Details
   },
+  created() {
+    bus.$on("busEmittedData", data => {
+      console.log("home > ");
+      this.formHeader = data;
+    });
+  },
   data() {
     return {
+      formHeader: "Contact Us",
       formData: {
         username: "",
         email: ""

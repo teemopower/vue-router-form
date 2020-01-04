@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { bus } from "../main.js";
+
 export default {
   name: "Sample",
   data() {
@@ -34,7 +36,8 @@ export default {
       console.log(this.testProp);
     },
     emitData() {
-      this.$emit("emittedData", this.testObject);
+      // this.$emit("emittedData", this.testObject);
+      bus.$emit("busEmittedData", "hello from bus");
     }
   },
   mounted() {
