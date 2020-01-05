@@ -41,16 +41,35 @@
       :title="updatedName"
       @emittedData="updateTitle($event)"
     />
+    <br>
+    <slot-example>
+      <div slot="form-header">
+        <h2>Form header</h2>
+        <p>Enter your information</p>
+      </div>
+      <div slot="form-fields">
+        <input type="text" placeholder="name">
+        <input type="password" placeholder="password">
+      </div>
+      <div slot="form-controls">
+        <button>Submit</button>
+      </div>
+    </slot-example>
+    <dynamic-components></dynamic-components>
   </div>
 </template>
 
 <script>
 import Sample from "./Sample.vue";
+import Slot from "./Slots.vue";
+import DynamicComponents from "./DynamicComponents.vue";
 
 export default {
   name: "Details",
   components: {
-    "component-sample": Sample
+    "dynamic-components": DynamicComponents,
+    "component-sample": Sample,
+    "slot-example": Slot
   },
   data() {
     return {
@@ -74,7 +93,8 @@ export default {
       showExample: true,
       refValue: "",
       updatedName: "",
-      updatedLocation: ""
+      updatedLocation: "",
+      dynamicSlotTitle: "I am a dynamic slot title"
     };
   },
   mounted() {

@@ -22,9 +22,8 @@
         <button @click="changeView(true)" @keyup.enter="submitForm">Change View</button>
       </div>
       <div></div>
-      <Details/>
+      <!-- <Details/> -->
     </div>
-    <!-- <Details/> -->
   </div>
 </template>
 
