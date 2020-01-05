@@ -40,8 +40,23 @@ export default {
       bus.$emit("busEmittedData", "hello from bus");
     }
   },
+  beforeCreate(){
+
+  },
+  created(){
+
+  },
+  beforeMount(){
+
+  },
   mounted() {
     this.accessPropData();
+  },
+  beforeUpdate(){
+
+  },
+  updated(){
+    
   }
 };
 </script>
