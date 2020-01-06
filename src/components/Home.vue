@@ -81,6 +81,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.home-container * {
+  box-sizing: border-box;
+}
 .home-container {
   font-family: Arial;
   max-width: 1280px;
