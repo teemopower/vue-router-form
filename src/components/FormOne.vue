@@ -1,17 +1,44 @@
 <template>
-  <div class="template-container">
-    Form one
-    <form class="form-one">
+  <div class="template-container">Form one
+    <form class="form-one" @submit.prevent="handleSubmit">
       <label>Name</label>
       <input type="text" v-model="blog.name">
       <br>
       <label>Description</label>
       <textarea v-model="blog.description"></textarea>
+      <br>
+      <label>Ninja</label>
+      <input type="checkbox" value="ninja" v-model="blog.categories">
+      <br>
+      <label>Samurai</label>
+      <input type="checkbox" value="samurai" v-model="blog.categories">
+      <br>
+      <label>Warrior</label>
+      <input type="checkbox" value="warrior" v-model="blog.categories">
+      <br>
+      <br>
+      <label>Select</label>
+      <br>
+      <select v-model="blog.city">
+        <option disabled>Select One</option>
+        <option v-for="(city,index) in blog.selectCities" :key="index">{{ city }}</option>
+      </select>
+      <br>
+      <br>
+      <button type="submit">Submit</button>
     </form>
     <div>
-    {{ blog.name }}
-    {{ blog.description }}
+      {{ blog.name }}
+      <br>
+      {{ blog.description }}
+      <br>
+      <div v-for="(category, index) in blog.categories" :key="index">
+        {{ category }}
+        <br>
+      </div>
+      <br>
     </div>
+    <div style="min-height: 300px"></div>
   </div>
 </template>
 
@@ -21,12 +48,24 @@ export default {
     return {
       blog: {
         name: "",
-        description: ""
+        description: "",
+        categories: [],
+        city: "",
+        selectCities: ["Seattle", "Los Angeles", "San Francisco"]
       }
     };
   },
   props: {},
-  methods: {},
+  methods: {
+    handleSubmit() {
+      const { name, description, categories, city } = this.blog;
+      console.log(name, description, categories, city);
+
+      let obj = {};
+      obj = this.blog;
+      console.log(obj);
+    }
+  },
   beforeCreate() {},
   created() {},
   beforeMount() {},

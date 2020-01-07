@@ -20,7 +20,7 @@ export default {
   },
   data() {
     return {
-      currentComponent: "page-one"
+      currentComponent: "form-one"
     };
   },
   props: {},

@@ -1,7 +1,7 @@
 <template>
   <div class="main-container">
     <h1>Details page</h1>
-    <ul v-for="test in testData">
+    <ul v-for="(test, index) in testData" :key="index">
       <li>{{ test.username }}</li>
       <li>{{ test.email }}</li>
     </ul>
