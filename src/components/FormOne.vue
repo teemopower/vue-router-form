@@ -1,32 +1,38 @@
 <template>
   <div class="template-container">Form one
-    <form class="form-one" @submit.prevent="handleSubmit">
-      <label>Name</label>
-      <input type="text" v-model="blog.name">
-      <br>
-      <label>Description</label>
-      <textarea v-model="blog.description"></textarea>
-      <br>
-      <label>Ninja</label>
-      <input type="checkbox" value="ninja" v-model="blog.categories">
-      <br>
-      <label>Samurai</label>
-      <input type="checkbox" value="samurai" v-model="blog.categories">
-      <br>
-      <label>Warrior</label>
-      <input type="checkbox" value="warrior" v-model="blog.categories">
-      <br>
-      <br>
-      <label>Select</label>
-      <br>
-      <select v-model="blog.city">
-        <option disabled>Select One</option>
-        <option v-for="(city,index) in blog.selectCities" :key="index">{{ city }}</option>
-      </select>
-      <br>
-      <br>
-      <button type="submit">Submit</button>
-    </form>
+    <div v-if="!submitted">
+      <form class="form-one" @submit.prevent="handleSubmit">
+        <label>Name</label>
+        <input type="text" v-model="blog.name">
+        <br>
+        <label>Description</label>
+        <textarea v-model="blog.description"></textarea>
+        <br>
+        <label>Ninja</label>
+        <input type="checkbox" value="ninja" v-model="blog.categories">
+        <br>
+        <label>Samurai</label>
+        <input type="checkbox" value="samurai" v-model="blog.categories">
+        <br>
+        <label>Warrior</label>
+        <input type="checkbox" value="warrior" v-model="blog.categories">
+        <br>
+        <br>
+        <label>Select</label>
+        <br>
+        <select v-model="blog.city">
+          <option disabled>Select One</option>
+          <option v-for="(city,index) in blog.selectCities" :key="index">{{ city }}</option>
+        </select>
+        <br>
+        <br>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <br>
+    <div v-if="submitted">
+      <h1>Submitted</h1>
+    </div>
     <div>
       {{ blog.name }}
       <br>
@@ -52,7 +58,8 @@ export default {
         categories: [],
         city: "",
         selectCities: ["Seattle", "Los Angeles", "San Francisco"]
-      }
+      },
+      submitted: false
     };
   },
   props: {},
@@ -60,10 +67,16 @@ export default {
     handleSubmit() {
       const { name, description, categories, city } = this.blog;
       console.log(name, description, categories, city);
-
-      let obj = {};
-      obj = this.blog;
-      console.log(obj);
+      this.$http
+        .post("https://jsonplaceholder.typicode.com/posts", {
+          title: this.blog.name,
+          body: this.blog.description,
+          userId: 1
+        })
+        .then(result => {
+          console.log(result);
+          this.submitted = true;
+        });
     }
   },
   beforeCreate() {},
