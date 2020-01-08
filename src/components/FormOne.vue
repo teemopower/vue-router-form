@@ -44,6 +44,7 @@
       </div>
       <br>
     </div>
+    <div>{{ info }}</div>
     <div style="min-height: 300px"></div>
   </div>
 </template>
@@ -59,7 +60,8 @@ export default {
         city: "",
         selectCities: ["Seattle", "Los Angeles", "San Francisco"]
       },
-      submitted: false
+      submitted: false,
+      info: null
     };
   },
   props: {},
@@ -67,16 +69,30 @@ export default {
     handleSubmit() {
       const { name, description, categories, city } = this.blog;
       console.log(name, description, categories, city);
-      this.$http
+      // this.$http
+      //   .post("https://jsonplaceholder.typicode.com/posts", {
+      //     title: this.blog.name,
+      //     body: this.blog.description,
+      //     userId: 1
+      //   })
+      //   .then(result => {
+      //     console.log(result);
+      //     this.submitted = true;
+      //   });
+
+      // this.axios
+      //   .get("https://api.coindesk.com/v1/bpi/currentprice.json")
+      //   .then(response => (this.info = response))
+      //   .catch(error => console.log(error));
+
+      this.axios
         .post("https://jsonplaceholder.typicode.com/posts", {
           title: this.blog.name,
           body: this.blog.description,
           userId: 1
         })
-        .then(result => {
-          console.log(result);
-          this.submitted = true;
-        });
+        .then(response => (this.info = response))
+        .catch(error => console.log(error));
     }
   },
   beforeCreate() {},
