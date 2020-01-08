@@ -46,7 +46,13 @@
       </div>
       <br>
     </div>
-    <div>{{ info }}</div>
+    <br>
+    <h1>search</h1>
+    <input type="text" v-model="search" placeholder="search">
+    <div v-for="(blog, index) in filteredBlogs" :key="index" style="border: thin solid">
+      <p>{{ blog.title }}</p>
+      <p>{{ blog.body }}</p>
+    </div>
     <div style="min-height: 300px"></div>
   </div>
 </template>
@@ -64,7 +70,9 @@ export default {
       },
       submitted: false,
       info: null,
-      filterExample: "filter example to uppercase"
+      filterExample: "filter example to uppercase",
+      blogs: [],
+      search: ""
     };
   },
   props: {},
@@ -94,8 +102,41 @@ export default {
           body: this.blog.description,
           userId: 1
         })
-        .then(response => (this.info = response))
+        .then(response => {
+          console.log(response);
+          this.info = response;
+          this.blogs = [
+            {
+              id: "1",
+              title: "new hope",
+              body: "luke and obi wan"
+            },
+            {
+              id: "2",
+              title: "force awakens",
+              body: "kylo and rey"
+            },
+            {
+              id: "3",
+              title: "return of the jedi",
+              body: "ewoks"
+            },
+            {
+              id: "4",
+              title: "toy story",
+              body: "buzz"
+            }
+          ];
+        })
         .catch(error => console.log(error));
+    }
+  },
+  computed: {
+    filteredBlogs() {
+      return this.blogs.filter(blog => {
+        console.log(this.search, blog.title);
+        return blog.title.match(this.search);
+      });
     }
   },
   beforeCreate() {},
