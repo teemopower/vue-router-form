@@ -1,6 +1,7 @@
 <template>
   <div class="template-container">
     <div v-theme:color="'dark'">Form one</div>
+    <div v-directiveTest="'purple'">Directives test</div>
     <div>{{ filterExample | slice }}</div>
     <div v-if="!submitted">
       <form class="form-one" @submit.prevent="handleSubmit">
@@ -50,7 +51,7 @@
     <h1>search</h1>
     <input type="text" v-model="search" placeholder="search">
     <div v-for="(blog, index) in filteredBlogs" :key="index" style="border: thin solid">
-      <p>{{ blog.title }}</p>
+      <p>{{ blog.title | toUppercase }}</p>
       <p>{{ blog.body }}</p>
     </div>
     <div style="min-height: 300px"></div>
@@ -137,6 +138,23 @@ export default {
         console.log(this.search, blog.title);
         return blog.title.match(this.search);
       });
+    }
+  },
+  filters: {
+    toUppercase(value) {
+      return value.toUpperCase();
+    }
+  },
+  directives: {
+    directiveTest: {
+      bind(el, binding, vnode) {
+        if (binding.value === "purple") {
+          el.style.color = "purple";
+        }
+        if (binding.value === "pink") {
+          el.style.color = "pink";
+        }
+      }
     }
   },
   beforeCreate() {},

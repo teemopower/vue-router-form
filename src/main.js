@@ -30,7 +30,7 @@ Vue.directive("theme", {
 
 // customer filters
 Vue.filter("slice", value => {
-  return value.slice(0, 5);
+  return value.slice(0, 10);
 });
 
 export const bus = new Vue();
