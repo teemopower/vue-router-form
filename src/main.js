@@ -29,8 +29,8 @@ Vue.directive("theme", {
 });
 
 // customer filters
-Vue.filter("to-uppercase", value => {
-  return value.toUpperCase();
+Vue.filter("slice", value => {
+  return value.slice(0, 5);
 });
 
 export const bus = new Vue();
