@@ -13,6 +13,7 @@ Vue.use(cors);
 
 Vue.config.productionTip = false;
 
+// custom directives
 Vue.directive("theme", {
   bind(el, binding, vnode) {
     if (binding.value === "bright") {
@@ -25,6 +26,11 @@ Vue.directive("theme", {
       el.style.backgroundColor = "gray";
     }
   }
+});
+
+// customer filters
+Vue.filter("to-uppercase", value => {
+  return value.toUpperCase();
 });
 
 export const bus = new Vue();

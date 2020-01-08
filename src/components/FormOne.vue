@@ -1,6 +1,7 @@
 <template>
   <div class="template-container">
     <div v-theme:color="'dark'">Form one</div>
+    <div>{{ filterExample | to-uppercase }}</div>
     <div v-if="!submitted">
       <form class="form-one" @submit.prevent="handleSubmit">
         <label>Name</label>
@@ -62,7 +63,8 @@ export default {
         selectCities: ["Seattle", "Los Angeles", "San Francisco"]
       },
       submitted: false,
-      info: null
+      info: null,
+      filterExample: "filter example to uppercase"
     };
   },
   props: {},
