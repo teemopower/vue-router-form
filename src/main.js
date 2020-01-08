@@ -13,6 +13,20 @@ Vue.use(cors);
 
 Vue.config.productionTip = false;
 
+Vue.directive("theme", {
+  bind(el, binding, vnode) {
+    if (binding.value === "bright") {
+      el.style.color = "red";
+    }
+    if (binding.value === "dark") {
+      el.style.color = "blue";
+    }
+    if (binding.arg === "color") {
+      el.style.backgroundColor = "gray";
+    }
+  }
+});
+
 export const bus = new Vue();
 
 new Vue({

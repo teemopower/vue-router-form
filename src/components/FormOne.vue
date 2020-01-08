@@ -1,5 +1,6 @@
 <template>
-  <div class="template-container">Form one
+  <div class="template-container">
+    <div v-theme:color="'dark'">Form one</div>
     <div v-if="!submitted">
       <form class="form-one" @submit.prevent="handleSubmit">
         <label>Name</label>
