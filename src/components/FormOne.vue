@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import searchMixin from "../mixins/searchMixin";
 export default {
   data() {
     return {
@@ -76,6 +77,7 @@ export default {
       search: ""
     };
   },
+  mixins: [searchMixin],
   props: {},
   methods: {
     handleSubmit() {
@@ -133,12 +135,12 @@ export default {
     }
   },
   computed: {
-    filteredBlogs() {
-      return this.blogs.filter(blog => {
-        console.log(this.search, blog.title);
-        return blog.title.match(this.search);
-      });
-    }
+    // filteredBlogs() {
+    //   return this.blogs.filter(blog => {
+    //     console.log(this.search, blog.title);
+    //     return blog.title.match(this.search);
+    //   });
+    // }
   },
   filters: {
     toUppercase(value) {
