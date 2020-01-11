@@ -25,7 +25,7 @@
         <br>
         <select v-model="blog.city">
           <option disabled>Select One</option>
-          <option v-for="(city,index) in blog.selectCities" :key="index">{{ city }}</option>
+          <option v-for="(city,index) in selectCities" :key="index">{{ city }}</option>
         </select>
         <br>
         <br>
@@ -36,22 +36,18 @@
     <div v-if="submitted">
       <h1>Submitted</h1>
     </div>
-    <div>
-      {{ blog.name }}
-      <br>
-      {{ blog.description }}
-      <br>
-      <div v-for="(category, index) in blog.categories" :key="index">
-        {{ category }}
-        <br>
-      </div>
-      <br>
-    </div>
     <br>
     <h1>search</h1>
     <input type="text" v-model="search" placeholder="search">
-    <div v-for="(blog, index) in filteredBlogs" :key="index" style="border: thin solid">
-      <p>{{ blog.title | toUppercase }}</p>
+    <div v-for="blog in filteredBlogs" :key="blog.id" style="border: thin solid">
+      <router-link :to="'/blog/' + blog.id">
+        <p>{{ blog.name | toUppercase }}</p>
+        <p>{{ blog.description }}</p>
+        <p>{{ blog.city }}</p>
+        <ul v-for="cat in blog.categories" :key="cat.id">
+          <li>{{ cat }}</li>
+        </ul>
+      </router-link>
       <p>{{ blog.body }}</p>
     </div>
     <div style="min-height: 300px"></div>
@@ -63,12 +59,12 @@ import searchMixin from "../mixins/searchMixin";
 export default {
   data() {
     return {
+      selectCities: ["Seattle", "Los Angeles", "San Francisco"],
       blog: {
         name: "",
         description: "",
         categories: [],
-        city: "",
-        selectCities: ["Seattle", "Los Angeles", "San Francisco"]
+        city: ""
       },
       submitted: false,
       info: null,
@@ -82,7 +78,6 @@ export default {
   methods: {
     handleSubmit() {
       const { name, description, categories, city } = this.blog;
-      console.log(name, description, categories, city);
       // this.$http
       //   .post("https://jsonplaceholder.typicode.com/posts", {
       //     title: this.blog.name,
@@ -100,36 +95,32 @@ export default {
       //   .catch(error => console.log(error));
 
       this.axios
-        .post("https://jsonplaceholder.typicode.com/posts", {
-          title: this.blog.name,
-          body: this.blog.description,
-          userId: 1
-        })
+        .post("https://vue-tutorial-8256a.firebaseio.com/posts.json", this.blog)
         .then(response => {
           console.log(response);
-          this.info = response;
-          this.blogs = [
-            {
-              id: "1",
-              title: "new hope",
-              body: "luke and obi wan"
-            },
-            {
-              id: "2",
-              title: "force awakens",
-              body: "kylo and rey"
-            },
-            {
-              id: "3",
-              title: "return of the jedi",
-              body: "ewoks"
-            },
-            {
-              id: "4",
-              title: "toy story",
-              body: "buzz"
-            }
-          ];
+          // this.info = response;
+          // this.blogs = [
+          //   {
+          //     id: "1",
+          //     title: "new hope",
+          //     body: "luke and obi wan"
+          //   },
+          //   {
+          //     id: "2",
+          //     title: "force awakens",
+          //     body: "kylo and rey"
+          //   },
+          //   {
+          //     id: "3",
+          //     title: "return of the jedi",
+          //     body: "ewoks"
+          //   },
+          //   {
+          //     id: "4",
+          //     title: "toy story",
+          //     body: "buzz"
+          //   }
+          // ];
         })
         .catch(error => console.log(error));
     }
@@ -160,7 +151,22 @@ export default {
     }
   },
   beforeCreate() {},
-  created() {},
+  created() {
+    this.axios
+      .get("https://vue-tutorial-8256a.firebaseio.com/posts.json")
+      .then(result => {
+        var blogsArray = [];
+        for (let key in result.data) {
+          result.data[key].id = key;
+          blogsArray.push(result.data[key]);
+        }
+
+        this.blogs = blogsArray;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
   beforeMount() {},
   mounted() {},
   beforeUpdate() {},

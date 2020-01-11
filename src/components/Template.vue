@@ -14,7 +14,9 @@ export default {
   beforeMount() {},
   mounted() {},
   beforeUpdate() {},
-  updated() {}
+  updated() {},
+  filters: {},
+  watch: {}
 };
 </script>
 

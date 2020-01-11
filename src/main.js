@@ -6,6 +6,8 @@ import cors from "cors";
 import axios from "axios";
 import VueAxios from "vue-axios";
 
+import { store } from "../src/store/store";
+
 Vue.use(VueAxios, axios);
 
 // Vue.use(VueResource);
@@ -37,5 +39,6 @@ export const bus = new Vue();
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount("#app");
